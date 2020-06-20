@@ -2,11 +2,13 @@ package controller;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dto.ArticleDto;
 import pojo.ArticleView;
@@ -15,6 +17,7 @@ import pojo.Category;
 import pojo.SysView;
 import pojo.SysViewExample;
 
+@Controller
 public class BackController extends BaseController{
 	/**
 	 * 增加一篇文章
@@ -130,6 +133,12 @@ public class BackController extends BaseController{
 	@DeleteMapping("/admin/view/system/{id}")
 	public String deleteSysView(@RequestParam(value = "id",required = true)Long id) {
 		sysviewservice.deleteByPrimaryKey(id);
+		return null;
+	}
+	
+	@ResponseBody
+	public String adminLogin(String account,String password) {
+		
 		return null;
 	}
 }

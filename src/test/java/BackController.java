@@ -142,4 +142,10 @@ public class BackController extends BaseController{
 		sysviewservice.deleteByPrimaryKey(id);
 		return null;
 	}
+	
+	
+	public String Login() {
+		
+		return null;
+	}
 }

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import pojo.Category;
 import pojo.CategoryExample;
 import pojo.SysView;
 
+@Controller
 public class ForeController extends BaseController{
 	/**
 	 * 获取所有文章
