@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,22 @@ public class ForeController extends BaseController{
 		Category category = categoryservice.selectByPrimaryKey(id);
 		return category;
 	}
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	@GetMapping("/api/category/article/{name}")
+	public List<ArticleDto> getArticleByCategory(@RequestParam(value = "name",required = true)String name) {
+		List<ArticleDto> articleDtos  = getArticles();
+		for (ArticleDto articleDto : articleDtos) {
+			if (!articleDto.getCategory().equals(name)) {
+				articleDtos.remove(articleDto);
+			}
+		}
+		return articleDtos;
+	}
+	
 	/**
 	 * 增加文章访问
 	 * @param articleview

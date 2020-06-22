@@ -2,7 +2,7 @@ window.onload(){
 	var articleId = getQueryParam("articleId");
 	
 $.ajax({
-	url:"api/categroy/"+articleId,
+	url:"api/article/"+articleId,
 	type:"GET",
 	dataType:"json",
 	success: function(json) {

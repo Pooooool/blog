@@ -1,53 +1,29 @@
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import application.BlogApplication;
 import dto.ArticleDto;
-import mapper.ArticleContentMapper;
-import mapper.ArticleInfoMapper;
-import pojo.ArticleContent;
-import pojo.ArticleContentExample;
 import pojo.ArticleView;
 import pojo.Category;
 import pojo.CategoryExample;
 import pojo.SysView;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BlogApplication.class)
+@Controller
 public class ForeController extends BaseController{
-	@Autowired
-	ArticleInfoMapper articleinfomapper;
-	@Autowired
-	ArticleContentMapper articlecontentmapper;
 	/**
 	 * 获取所有文章
 	 * @return
 	 */
-	
-	@Test
-	public void getArticles(){
-		Long id = (long) 1;
-		System.out.println(articlecontentmapper.selectByPrimaryKey(id).getContent()); 
-		ArticleContentExample articleContentExample = new ArticleContentExample();
-		articleContentExample.setOrderByClause("id asc");
-		List<ArticleContent> articleContents = articlecontentmapper.selectByExampleWithBLOBs(articleContentExample);
-		for (ArticleContent articleContent : articleContents) {
-			System.out.println(articleContent.toString());
-		}
+	@GetMapping("/api/article")
+	public List<ArticleDto> getArticles(){
 		List<ArticleDto> articleDtos = articleservice.selectArticle();
-		for (ArticleDto articleDto : articleDtos) {
-			System.out.println(articleDto.toString());
-		}
+		return articleDtos;
 		
 	}
 	/**
@@ -78,9 +54,22 @@ public class ForeController extends BaseController{
 	 */
 	@GetMapping("/api/category/{id}")
 	public Category getCategory(@RequestParam(value = "id",required = true)Long id) {
-		Category category = categoryservice.selectByPrimaryKey(id);
+		Category category = null;
+		System.out.println("id");
 		return category;
 	}
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	@GetMapping("/api/category/{name}")
+	public List<ArticleDto> getArticleByCategory(@RequestParam(value = "name",required = true)String name) {
+		List<ArticleDto> articleDtos =null;
+		System.out.println("name");
+		return articleDtos;
+	}
+	
 	/**
 	 * 增加文章访问
 	 * @param articleview
