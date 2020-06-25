@@ -113,5 +113,24 @@ public class ArticleServiceImpl implements ArticleService{
 		
 	} 
 	
+	@Override
+	public List<ArticleInfo> selectArtcileInfoByCategory(String name) {
+		// TODO Auto-generated method stub
+		List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
+		ArticleInfoExample example = new ArticleInfoExample();
+		example.createCriteria();
+		example.getOredCriteria().get(0).andCategoryEqualTo(name);
+		articleInfos = articleinfomapper.selectByExample(example);
+		return articleInfos;
+	}
+	
+	@Override
+	public List<ArticleInfo> selectArticleInfo() {
+		// TODO Auto-generated method stub
+		List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
+		ArticleInfoExample example = new ArticleInfoExample();
+		articleInfos = articleinfomapper.selectByExample(example);
+		return articleInfos;
+	}
 	
 }

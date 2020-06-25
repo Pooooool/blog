@@ -3,7 +3,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +18,12 @@ import pojo.ArticleView;
 import pojo.Category;
 import pojo.CategoryExample;
 import pojo.SysView;
-
+import service.ArticleService;
+import service.ArticleViewService;
+import service.CategoryService;
+import service.SysViewService;
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = BlogApplication.class)
 @Controller
 public class ForeController extends BaseController{
 	/**
@@ -40,12 +50,12 @@ public class ForeController extends BaseController{
 	 * 获取所有分类
 	 * @return
 	 */
-	@GetMapping("/api/category")
-	public List<Category> getCategories(){
+	@Test
+	public void getCategories(){
 		CategoryExample example = new CategoryExample();
 		example.setOrderByClause("id asc");
 		List<Category> categories = categoryservice.selectByExample(example);
-		return categories;
+		System.out.println(categories);
 	}
 	/**
 	 * 获取某一分类

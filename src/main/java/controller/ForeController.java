@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dto.ArticleDto;
+import pojo.ArticleInfo;
 import pojo.ArticleView;
 import pojo.Category;
 import pojo.CategoryExample;
@@ -58,7 +59,8 @@ public class ForeController extends BaseController{
 		return category;
 	}
 	/**
-	 * 
+	 * 2020年6月25日之前
+	 * 获取分类下文章信息
 	 * @param name
 	 * @return
 	 */
@@ -92,5 +94,25 @@ public class ForeController extends BaseController{
 	public String addSysView(SysView sysview) {
 		sysviewservice.insertSelective(sysview);
 		return null;
+	}
+	/**
+	 * 获取文章信息
+	 * @return
+	 */
+	@GetMapping("/api/articleinfo")
+	public List<ArticleInfo> getArticleInfo(){
+		List<ArticleInfo> articleInfos = articleservice.selectArticleInfo();
+		return articleInfos;
+	}
+	/**
+	 * 获取分类下文章信息
+	 * @param categoryName
+	 * @return
+	 */
+	@GetMapping("/api/articleinfo/{name}")
+	public List<ArticleInfo> getArticleInfoByCategory(@RequestParam(value = "name",required = true)String categoryName){
+		List<ArticleInfo> articleInfos = articleservice.selectArtcileInfoByCategory(categoryName);
+		return articleInfos;
+		
 	}
 }

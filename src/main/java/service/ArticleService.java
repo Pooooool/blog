@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import dto.ArticleDto;
 import pojo.ArticleContent;
 import pojo.ArticleContentExample;
+import pojo.ArticleInfo;
 
 public interface ArticleService {
 	 void addArticle(ArticleDto articleDto);
@@ -19,4 +20,7 @@ public interface ArticleService {
 	 
 	 void deleteArticle(Long id);
 	 
+	 List<ArticleInfo> selectArticleInfo();
+	 
+	 List<ArticleInfo> selectArtcileInfoByCategory(String name);
 }
