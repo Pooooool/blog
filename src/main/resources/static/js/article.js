@@ -1,3 +1,4 @@
+<>
 window.onload(){
 	var articleId = getQueryParam("articleId");
 	
@@ -6,10 +7,10 @@ $.ajax({
 	type:"GET",
 	dataType:"json",
 	success: function(json) {
-		$("#articleTitle").html(json.title);
-		$("#articleCreateBy").html(json.createby);
-		$("#articleImg").html(json.image_path);
-		$("#articleContent").html(json.content);
+		document.querySelector("#articleTitle").innerText =json.title;
+		document.querySelector("#articleCreateBy").innerText= json.create_by;
+		document.querySelector("#articleImg").src = json.image_path;
+		document.querySelector("#articleContent").innerHtml = json.content;
 	}
 });
 
