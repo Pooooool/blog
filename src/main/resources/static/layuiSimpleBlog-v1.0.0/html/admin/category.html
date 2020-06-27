@@ -56,6 +56,32 @@
 			  </thead>
 			</table>
 		
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+		  <legend>编辑</legend>
+		</fieldset>
+		
+		<form class="layui-form" action="">
+	<div class="layui-form-item">
+		<div class="layui-form-item">
+		<label class="layui-form-label" style="width:200px;text-align:left;" id="oldCategoryName">旧的分类名：</label>
+		</div>
+	<div>
+    <label class="layui-form-label">新的分类名:</label>
+		<div class="layui-input-block">
+		<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入分类名" class="layui-input" style="width:200px;">
+		</div>
+	</div>
+	</div>
+	
+	<div class="layui-form-item">
+    <div class="layui-input-block">
+      <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+	</div>
+		</form>
+		
+		
 		</div>
       </div>
       
@@ -74,10 +100,6 @@
 	
 	layui.use('table', function(){
 	  var table = layui.table;
-	  //监听表格复选框选择
-	  table.on('checkbox(demo)', function(obj){
-		console.log(obj)
-	  });
 	  //监听工具条
 	  table.on('tool(demo)', function(obj){
 		var data = obj.data;
@@ -115,10 +137,7 @@
 		active[type] ? active[type].call(this) : '';
 	  });
 	});
-		
-		
-		
-		
+				
     </script>
     </body>
     </html>
