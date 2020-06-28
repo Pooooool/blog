@@ -1,4 +1,4 @@
-
+package blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,6 @@ import blog.service.ArticleService;
 import blog.service.ArticleViewService;
 import blog.service.CategoryService;
 import blog.service.SysViewService;
-
 @Controller
 public abstract class BaseController {
 	@Autowired

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.CategoryMapper">
-  <resultMap id="BaseResultMap" type="pojo.Category">
+  <resultMap id="BaseResultMap" type="blog.pojo.Category">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="number" jdbcType="BIGINT" property="number" />
@@ -40,7 +40,7 @@
   <sql id="Base_Column_List">
     id, name, number, create_by, modify_by
   </sql>
-  <select id="selectByExample" parameterType="pojo.CategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="blog.pojo.CategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -65,13 +65,13 @@
     delete from tbl_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="pojo.Category" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="blog.pojo.Category" useGeneratedKeys="true">
     insert into tbl_category (name, number, create_by, 
       modify_by)
     values (#{name,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, #{create_by,jdbcType=TIMESTAMP}, 
       #{modify_by,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="pojo.Category" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="blog.pojo.Category" useGeneratedKeys="true">
     insert into tbl_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -102,7 +102,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.Category">
+  <update id="updateByPrimaryKeySelective" parameterType="blog.pojo.Category">
     update tbl_category
     <set>
       <if test="name != null">
@@ -120,7 +120,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.Category">
+  <update id="updateByPrimaryKey" parameterType="blog.pojo.Category">
     update tbl_category
     set name = #{name,jdbcType=VARCHAR},
       number = #{number,jdbcType=BIGINT},

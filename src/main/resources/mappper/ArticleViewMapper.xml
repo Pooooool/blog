@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ArticleViewMapper">
-  <resultMap id="BaseResultMap" type="pojo.ArticleView">
+  <resultMap id="BaseResultMap" type="blog.pojo.ArticleView">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="create_by" jdbcType="TIMESTAMP" property="create_by" />
@@ -39,7 +39,7 @@
   <sql id="Base_Column_List">
     id, ip, create_by, article_id
   </sql>
-  <select id="selectByExample" parameterType="pojo.ArticleViewExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="blog.pojo.ArticleViewExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -64,13 +64,13 @@
     delete from article_view
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleView" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleView" useGeneratedKeys="true">
     insert into article_view (ip, create_by, article_id
       )
     values (#{ip,jdbcType=VARCHAR}, #{create_by,jdbcType=TIMESTAMP}, #{article_id,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleView" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleView" useGeneratedKeys="true">
     insert into article_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ip != null">
@@ -95,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.ArticleView">
+  <update id="updateByPrimaryKeySelective" parameterType="blog.pojo.ArticleView">
     update article_view
     <set>
       <if test="ip != null">
@@ -110,7 +110,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.ArticleView">
+  <update id="updateByPrimaryKey" parameterType="blog.pojo.ArticleView">
     update article_view
     set ip = #{ip,jdbcType=VARCHAR},
       create_by = #{create_by,jdbcType=TIMESTAMP},

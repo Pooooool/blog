@@ -1,18 +1,16 @@
-
+package blog.controller;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import blog.BlogApplication;
 import blog.dto.ArticleDto;
 import blog.pojo.ArticleView;
 import blog.pojo.ArticleViewExample;
@@ -20,21 +18,17 @@ import blog.pojo.Category;
 import blog.pojo.SysView;
 import blog.pojo.SysViewExample;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BlogApplication.class)
+@Controller
 public class BackController extends BaseController{
-	@Test
 	/**
 	 * 增加一篇文章
 	 * @param articleDto
 	 * @return
 	 */
-	
-	public void addArticle() {
-		
-		articleservice.addArticle(new ArticleDto());
-		
-	
+	@PostMapping("/article")
+	public String addArticle(ArticleDto articleDto) {
+		articleservice.addArticle(articleDto);
+		return null;
 	}
 	/**	
 	 * 更新一篇文章
@@ -143,9 +137,11 @@ public class BackController extends BaseController{
 		return null;
 	}
 	
-	
-	public String Login() {
+	@ResponseBody
+	public String adminLogin(String account,String password) {
 		
 		return null;
 	}
+	
+
 }

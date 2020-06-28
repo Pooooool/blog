@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ArticleContentMapper">
-  <resultMap id="BaseResultMap" type="pojo.ArticleContent">
+  <resultMap id="BaseResultMap" type="blog.pojo.ArticleContent">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="article_id" jdbcType="BIGINT" property="article_id" />
     <result column="create_by" jdbcType="TIMESTAMP" property="create_by" />
     <result column="modify_by" jdbcType="TIMESTAMP" property="modify_by" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="pojo.ArticleContent">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="blog.pojo.ArticleContent">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -45,7 +45,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="pojo.ArticleContentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="blog.pojo.ArticleContentExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -62,7 +62,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="pojo.ArticleContentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="blog.pojo.ArticleContentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -89,13 +89,13 @@
     delete from tbl_ariticle_content
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleContent" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleContent" useGeneratedKeys="true">
     insert into tbl_ariticle_content (article_id, create_by, modify_by, 
       content)
     values (#{article_id,jdbcType=BIGINT}, #{create_by,jdbcType=TIMESTAMP}, #{modify_by,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleContent" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleContent" useGeneratedKeys="true">
     insert into tbl_ariticle_content
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="article_id != null">
@@ -126,7 +126,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.ArticleContent">
+  <update id="updateByPrimaryKeySelective" parameterType="blog.pojo.ArticleContent">
     update tbl_ariticle_content
     <set>
       <if test="article_id != null">
@@ -144,7 +144,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="pojo.ArticleContent">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="blog.pojo.ArticleContent">
     update tbl_ariticle_content
     set article_id = #{article_id,jdbcType=BIGINT},
       create_by = #{create_by,jdbcType=TIMESTAMP},
@@ -152,7 +152,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.ArticleContent">
+  <update id="updateByPrimaryKey" parameterType="blog.pojo.ArticleContent">
     update tbl_ariticle_content
     set article_id = #{article_id,jdbcType=BIGINT},
       create_by = #{create_by,jdbcType=TIMESTAMP},

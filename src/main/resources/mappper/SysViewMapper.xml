@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.SysViewMapper">
-  <resultMap id="BaseResultMap" type="pojo.SysView">
+  <resultMap id="BaseResultMap" type="blog.pojo.SysView">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="operation" jdbcType="VARCHAR" property="operation" />
@@ -39,7 +39,7 @@
   <sql id="Base_Column_List">
     id, ip, operation, create_by
   </sql>
-  <select id="selectByExample" parameterType="pojo.SysViewExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="blog.pojo.SysViewExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -64,13 +64,13 @@
     delete from sys_view
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="pojo.SysView" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="blog.pojo.SysView" useGeneratedKeys="true">
     insert into sys_view (ip, operation, create_by
       )
     values (#{ip,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, #{create_by,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="pojo.SysView" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="blog.pojo.SysView" useGeneratedKeys="true">
     insert into sys_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ip != null">
@@ -95,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.SysView">
+  <update id="updateByPrimaryKeySelective" parameterType="blog.pojo.SysView">
     update sys_view
     <set>
       <if test="ip != null">
@@ -110,7 +110,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.SysView">
+  <update id="updateByPrimaryKey" parameterType="blog.pojo.SysView">
     update sys_view
     set ip = #{ip,jdbcType=VARCHAR},
       operation = #{operation,jdbcType=VARCHAR},

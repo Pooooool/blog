@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ArticleInfoMapper">
-  <resultMap id="BaseResultMap" type="pojo.ArticleInfo">
+  <resultMap id="BaseResultMap" type="blog.pojo.ArticleInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -42,7 +42,7 @@
   <sql id="Base_Column_List">
     id, category, title, create_by, modify_by, image_path, is_top
   </sql>
-  <select id="selectByExample" parameterType="pojo.ArticleInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="blog.pojo.ArticleInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -67,7 +67,7 @@
     delete from tbl_ariticle_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleInfo" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleInfo" useGeneratedKeys="true">
     insert into tbl_ariticle_info (category, title, create_by, 
       modify_by, image_path, is_top
       )
@@ -75,7 +75,7 @@
       #{modify_by,jdbcType=TIMESTAMP}, #{image_path,jdbcType=VARCHAR}, #{is_top,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="pojo.ArticleInfo" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="blog.pojo.ArticleInfo" useGeneratedKeys="true">
     insert into tbl_ariticle_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="category != null">
@@ -118,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.ArticleInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="blog.pojo.ArticleInfo">
     update tbl_ariticle_info
     <set>
       <if test="category != null">
@@ -142,7 +142,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.ArticleInfo">
+  <update id="updateByPrimaryKey" parameterType="blog.pojo.ArticleInfo">
     update tbl_ariticle_info
     set category = #{category,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
