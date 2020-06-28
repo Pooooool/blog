@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dto.ArticleDto;
@@ -115,4 +116,16 @@ public class ForeController extends BaseController{
 		return articleInfos;
 		
 	}
+	
+	@RequestMapping("/")
+	public String toIndex() {
+		return "index.html";
+	}
+	
+	@RequestMapping("/test")
+	public String test() {
+		System.out.println("test");
+		return "test";
+	}
+	
 }
