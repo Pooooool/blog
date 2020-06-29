@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,7 @@ public class ForeController extends BaseController{
 	 * @return
 	 */
 	@GetMapping("/api/article/{id}")
-	public ArticleDto getArticle(@RequestParam(value = "id",required = true)Long id) {
+	public ArticleDto getArticle(@PathVariable(value = "id",required = true)Long id) {
 		ArticleDto articleDto = articleservice.selectOneById(id);
 		return articleDto;
 	}
@@ -118,7 +119,7 @@ public class ForeController extends BaseController{
 		
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("/asdasd")
 	public String test() {
 		System.out.println("test");
 		return null;

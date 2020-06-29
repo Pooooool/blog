@@ -129,6 +129,7 @@ public class ArticleServiceImpl implements ArticleService{
 		// TODO Auto-generated method stub
 		List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
 		ArticleInfoExample example = new ArticleInfoExample();
+		example.setOrderByClause("id desc");
 		articleInfos = articleinfomapper.selectByExample(example);
 		return articleInfos;
 	}
