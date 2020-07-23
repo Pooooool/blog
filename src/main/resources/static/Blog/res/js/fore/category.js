@@ -1,17 +1,17 @@
-window.onload(){
+$(window).load(function(){
 	var categoryId = getQueryParam("articleId");
 	var categoryName;
 	$.ajax({
-		url:"api/categroy",
+		url:"127.0.0.1:80/api/categroy",
 		type:"GET",
 		dataType:"json",
-		success: function(json) {
+		success: function(json){
 			var category = document.querySelector(".nav");
 			var categoryinfo = document.querySelector("#category");
-			$.each(json,function(i,category){
-				categoryinfo.content.querySelector("a").id ="category"+category.id;
-				categoryinfo.content.querySelector("a").href ="?categoryId="+category.id;
-				categoryinfo.content.querySelector("a").innerText =category.name;
+			$.each(json,function(i,articlecategory){
+				categoryinfo.content.querySelector("a").id ="category"+articlecategory.id;
+				categoryinfo.content.querySelector("a").href ="?categoryId="+articlecategory.id;
+				categoryinfo.content.querySelector("a").innerText =articlecategory.name;
 				category.appendChild(categoryinfo.content.querySelector("a").cloneNode(true));
 			});
 		}
@@ -32,7 +32,7 @@ window.onload(){
 	}
 	
 	
-}
+});
 
 function getArticles() {
 	//获取所有文章
@@ -41,17 +41,17 @@ function getArticles() {
 		type:"GET",
 		dataType:"json",
 		success: function(json) {
-			$.each(json,function(i,category){
+			$.each(json,function(i,info){
 				var articleinfo = document.querySelector("#article");
-				articleinfo.content.querySelector(".text-cont").innerText = json.title;
-				articleinfo.content.querySelector("#articleImg").src = json.image_path;
-				var time = json.create_by.split(" ");
+				articleinfo.content.querySelector(".text-cont").innerText = info.title;
+				articleinfo.content.querySelector("#articleImg").src = info.image_path;
+				var time = info.create_by.split(" ");
 				articleinfo.content.querySelector(".hour").innerText = time[1];
 				articleinfo.content.querySelector(".date").innerText = time[0];
-				document.querySelector(".article-list").appendChild(articleinfo.content.querySelector(".item-box").cloneNode(true);)
+				document.querySelector(".article-list").appendChild(articleinfo.content.querySelector(".item-box").cloneNode(true));
 			});
 		}
-		)};
+	});
 }
 
 function getArticlesByCategory() {
@@ -61,17 +61,19 @@ function getArticlesByCategory() {
 		type:"GET",
 		dataType:"json",
 		success: function(json) {
-			$.each(json,function(i,category){
+			$.each(json,function(i,info){
 				var articleinfo = document.querySelector("#article");
-				articleinfo.content.querySelector(".text-cont").innerText = json.title;
-				articleinfo.content.querySelector("#articleImg").src = json.image_path;
-				var time = json.create_by.split(" ");
+				articleinfo.content.querySelector(".text-cont").innerText = info.title;
+				articleinfo.content.querySelector("#articleImg").src = info.image_path;
+				console.log(info.create_by);
+				var time = info.create_by.split(" ");
+				
 				articleinfo.content.querySelector(".hour").innerText = time[1];
 				articleinfo.content.querySelector(".date").innerText = time[0];
-				document.querySelector(".article-list").appendChild(articleinfo.content.querySelector(".item-box").cloneNode(true);)
+				document.querySelector(".article-list").appendChild(articleinfo.content.querySelector(".item-box").cloneNode(true));
 			});
 		}
-		)};
+	});
 }
 
 function getQueryParam(targetParam) {

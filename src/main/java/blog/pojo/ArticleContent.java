@@ -3,6 +3,8 @@ package blog.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ArticleContent implements Serializable {
     private Long id;
 
@@ -31,7 +33,7 @@ public class ArticleContent implements Serializable {
     public void setArticle_id(Long article_id) {
         this.article_id = article_id;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreate_by() {
         return create_by;
     }

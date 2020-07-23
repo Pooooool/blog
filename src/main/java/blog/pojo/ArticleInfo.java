@@ -3,6 +3,8 @@ package blog.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ArticleInfo implements Serializable {
     private Long id;
 
@@ -44,6 +46,7 @@ public class ArticleInfo implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
+   
     public Date getCreate_by() {
         return create_by;
     }

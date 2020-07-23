@@ -14,6 +14,6 @@ $(window).load(function(){
 					document.querySelector(".list-item").appendChild(articleinfo.content.querySelector(".item").cloneNode(true));
 				});
 			}
-			});
+			});	
 	
 });
