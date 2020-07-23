@@ -9,9 +9,9 @@ public class ArticleContent implements Serializable {
     private Long id;
 
     private Long article_id;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date create_by;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modify_by;
 
     private String content;
@@ -33,7 +33,7 @@ public class ArticleContent implements Serializable {
     public void setArticle_id(Long article_id) {
         this.article_id = article_id;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+   
     public Date getCreate_by() {
         return create_by;
     }

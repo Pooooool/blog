@@ -1,8 +1,8 @@
 $(window).load(function(){
-	var categoryId = getQueryParam("articleId");
+	var categoryId = getQueryParam("categoryId");
 	var categoryName;
 	$.ajax({
-		url:"127.0.0.1:80/api/categroy",
+		url:"api/category",
 		type:"GET",
 		dataType:"json",
 		success: function(json){
@@ -44,7 +44,8 @@ function getArticles() {
 			$.each(json,function(i,info){
 				var articleinfo = document.querySelector("#article");
 				articleinfo.content.querySelector(".text-cont").innerText = info.title;
-				articleinfo.content.querySelector("#articleImg").src = info.image_path;
+				//题图暂时默认
+				//articleinfo.content.querySelector("#articleImg").src = info.image_path;
 				var time = info.create_by.split(" ");
 				articleinfo.content.querySelector(".hour").innerText = time[1];
 				articleinfo.content.querySelector(".date").innerText = time[0];

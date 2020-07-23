@@ -119,10 +119,4 @@ public class ForeController extends BaseController{
 		
 	}
 	
-	@RequestMapping("/asdasd")
-	public String test() {
-		System.out.println("test");
-		return null;
-	}
-	
 }

@@ -11,9 +11,9 @@ public class ArticleInfo implements Serializable {
     private String category;
 
     private String title;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date create_by;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modify_by;
 
     private String image_path;
