@@ -10,7 +10,7 @@ $(window).load(function(){
 					var articleinfo = document.querySelector("#article");
 					articleinfo.content.querySelector("#articleTitle").innerText = category.title;
 					articleinfo.content.querySelector("#articleImg").src = category.image_path;
-					articleinfo.content.querySelector(".go-icon").href="article.html?articleId="+category.id;
+					articleinfo.content.querySelector(".go-icon").href="essay.html?articleId="+category.id;
 					document.querySelector(".list-item").appendChild(articleinfo.content.querySelector(".item").cloneNode(true));
 				});
 			}

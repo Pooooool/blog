@@ -35,8 +35,8 @@ public class ForeController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/api/article/{id}")
-	public ArticleDto getArticle(@PathVariable(value = "id",required = true)Long id) {
+	@GetMapping("/api/article/{articleId}")
+	public ArticleDto getArticle(@PathVariable(value = "articleId",required = true)Long id) {
 		ArticleDto articleDto = articleservice.selectOneById(id);
 		return articleDto;
 	}
@@ -113,7 +113,7 @@ public class ForeController extends BaseController{
 	 * @return
 	 */
 	@GetMapping("/api/articleinfo/{name}")
-	public List<ArticleInfo> getArticleInfoByCategory(@RequestParam(value = "name",required = true)String categoryName){
+	public List<ArticleInfo> getArticleInfoByCategory(@PathVariable(value = "name",required = true)String categoryName){
 		List<ArticleInfo> articleInfos = articleservice.selectArtcileInfoByCategory(categoryName);
 		return articleInfos;
 		

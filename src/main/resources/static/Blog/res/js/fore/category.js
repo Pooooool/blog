@@ -1,10 +1,11 @@
+var categoryName;
 $(window).load(function(){
 	var categoryId = getQueryParam("categoryId");
-	var categoryName;
 	$.ajax({
 		url:"api/category",
 		type:"GET",
 		dataType:"json",
+		async:false,
 		success: function(json){
 			var category = document.querySelector(".nav");
 			var categoryinfo = document.querySelector("#category");
@@ -22,13 +23,11 @@ $(window).load(function(){
 		getArticles();
 	} else {
 		//渲染特定分类文章
-		//将特定分类设为选定
-		if (categoryId==null) {
-			getArticles();
-		} else {
-			categoryName = document.querySelector("#category"+categoryId).innerText;
-			getArticlesByCategory();
-		}
+		//将特定分类设为选定	
+		//获取categoryName
+		categoryName = document.querySelector("#category1").innerText;
+		getArticlesByCategory();
+		
 	}
 	
 	
