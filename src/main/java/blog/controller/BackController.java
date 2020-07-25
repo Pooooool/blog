@@ -1,6 +1,10 @@
 package blog.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +21,26 @@ import blog.pojo.ArticleViewExample;
 import blog.pojo.Category;
 import blog.pojo.SysView;
 import blog.pojo.SysViewExample;
+import blog.pojo.User;
 
 @Controller
 public class BackController extends BaseController{
+	private static String account = "admin";
+	private static String password = "admin";
+	
+	@PostMapping("/tologin")
+	public String login(User user,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		if (user.getName().equals(account) && user.getPassword().equals(password)) {
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("/admin/article.html");
+		} else {
+			response.sendRedirect("/admin/login.html");
+		}
+		return null;
+	}
+	
+	
+	
 	/**
 	 * 增加一篇文章
 	 * @param articleDto
@@ -137,11 +158,7 @@ public class BackController extends BaseController{
 		return null;
 	}
 	
-	@ResponseBody
-	public String adminLogin(String account,String password) {
-		
-		return null;
-	}
+	
 	
 
 }

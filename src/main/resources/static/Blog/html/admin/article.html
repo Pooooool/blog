@@ -1,41 +1,41 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-      <title>Blog后台</title>
-  <link rel="stylesheet" type="text/css" href="../../res/layui/css/layui.css">
-    </head>
-    <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
-      <div class="layui-header">
-        <div class="layui-logo">Blog后台</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-          <li class="layui-nav-item"><a href="">控制台</a></li>
-        </ul>   
-      </div>
-      
-      <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-          <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-          <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-            <li class="layui-nav-item layui-this"><a href="">文章管理</a></li>
-			 <li class="layui-nav-item"><a href="">分类管理</a></li>
-			    <li class="layui-nav-item">
-				<a href="javascript:;">系统管理</a>
-				<dl class="layui-nav-child">
-				<dd><a href="">系统访问</a></dd>
-				<dd><a href="">文章访问</a></dd>
-        </dl>
-      </li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Blog后台</title>
+<link rel="stylesheet" type="text/css" href="../../res/layui/css/layui.css">
+  </head>
+  <body class="layui-layout-body">
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+      <div class="layui-logo">Blog后台</div>
+      <!-- 头部区域（可配合layui已有的水平导航） -->
+  <ul class="layui-nav layui-layout-left">
+    <li class="layui-nav-item"><a href="">控制台</a></li>
+  </ul>   
+</div>
+
+<div class="layui-side layui-bg-black">
+  <div class="layui-side-scroll">
+    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-this"><a href="/admin/article.html">文章管理</a></li>
+<li class="layui-nav-item"><a href="/admin/category.html">分类管理</a></li>
+   <li class="layui-nav-item">
+<a href="javascript:;">系统管理</a>
+<dl class="layui-nav-child">
+<dd><a href="/admin/systemview.html">系统访问</a></dd>
+<dd><a href="/admin/articleview.html">文章访问</a></dd>
+    </dl>
+  </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+ <div style="padding: 15px;">
 			<form class="layui-form" action="">
   <div class="layui-form-item">
     <label class="layui-form-label">标题</label>
@@ -92,63 +92,63 @@
       
       <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © Blog后台
-      </div>
+      © Blog后台
     </div>
-  <script type="text/javascript" src="../../res/layui/layui.js"></script>
-    <script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-      var element = layui.element;
-      
-    });
-	
-		//Demo
-	layui.use('form', function(){
-	  var form = layui.form;
-	  
-	  //监听提交
-	  form.on('submit(formDemo)', function(data){
-		layer.msg(JSON.stringify(data.field));
-		return false;
-	  });
-	});
-	
-	layui.use('upload', function(){
-  var $ = layui.jquery
-  ,upload = layui.upload;
+  </div>
+<script type="text/javascript" src="../../res/layui/layui.js"></script>
+  <script>
+   //JavaScript代码区域
+   layui.use('element', function(){
+     var element = layui.element;
+     
+   });
+
+	//Demo
+layui.use('form', function(){
+  var form = layui.form;
   
-  //普通图片上传
-  var uploadInst = upload.render({
-    elem: '#test1'
-    ,url: 'https://httpbin.org/post' //改成您自己的上传接口
-    ,before: function(obj){
-      //预读本地文件示例，不支持ie8
-      obj.preview(function(index, file, result){
-        $('#demo1').attr('src', result); //图片链接（base64）
-      });
-    }
-    ,done: function(res){
-      //如果上传失败
-      if(res.code > 0){
-        return layer.msg('上传失败');
-      }
-      //上传成功
-    }
-    ,error: function(){
-      //演示失败状态，并实现重传
-      var demoText = $('#demoText');
-      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-      demoText.find('.demo-reload').on('click', function(){
-        uploadInst.upload();
-      });
-    }
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+	layer.msg(JSON.stringify(data.field));
+	return false;
   });
-  
+});
+
+layui.use('upload', function(){
+ var $ = layui.jquery
+ ,upload = layui.upload;
+ 
+ //普通图片上传
+ var uploadInst = upload.render({
+   elem: '#test1'
+   ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+   ,before: function(obj){
+     //预读本地文件示例，不支持ie8
+     obj.preview(function(index, file, result){
+       $('#demo1').attr('src', result); //图片链接（base64）
+     });
+   }
+   ,done: function(res){
+     //如果上传失败
+     if(res.code > 0){
+       return layer.msg('上传失败');
+     }
+     //上传成功
+   }
+   ,error: function(){
+     //演示失败状态，并实现重传
+     var demoText = $('#demoText');
+     demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+     demoText.find('.demo-reload').on('click', function(){
+       uploadInst.upload();
+     });
+   }
  });
-	
-	
-    </script>
-    </body>
-    </html>
-          
+ 
+});
+
+
+   </script>
+</body>
+</html>
+      

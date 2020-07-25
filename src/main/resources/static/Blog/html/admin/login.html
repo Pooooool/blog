@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="../../res/layui/css/layui.css">
+<script type="text/javascript" src="../../res/layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form" action="/tologin" method="post">
+<div class="layui-row">
+    <div class="layui-col-md12">
+        账号：<input class="layui-input" name="name" style="width: 32.5028%;" type="text" autocomplete="off" placeholder="请输入账号"/>
+    </div>
+    <div class="layui-col-md12">
+        密码： <input type="password" name="password"  style="width: 32.5028%;" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-col-md6 layui-col-lg6">
+     <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+    </div>
+</div>
+</form>
+</body>
+</html>
