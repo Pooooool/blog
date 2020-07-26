@@ -1,6 +1,8 @@
 package blog.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +49,22 @@ public class BackController extends BaseController{
 	 * @return
 	 */
 	@PostMapping("/article")
-	public String addArticle(ArticleDto articleDto) {
+	@ResponseBody
+	public String addArticle(ArticleDto articleDto,
+			@RequestParam(name = "file",required = false)String imgfile,
+			@RequestParam(name = "topswitch",required = false)String topswitch) {
+		if(topswitch!=null) {
+			articleDto.setIs_top(true);
+		}else {
+			articleDto.setIs_top(false);
+		}
+		articleDto.setImage_path(imgfile);
+		
+	    Date dNow = new Date( );	
+	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+	    
+	    
+		
 		articleservice.addArticle(articleDto);
 		return null;
 	}

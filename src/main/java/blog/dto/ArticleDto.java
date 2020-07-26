@@ -13,7 +13,7 @@ public class ArticleDto {
 	    private String title;
 
 	    private String image_path;
-
+	    
 	    public Long getId() {
 			return id;
 		}
@@ -71,13 +71,12 @@ public class ArticleDto {
 		}
 
 		private Boolean is_top;
-	
 	    /**
 	     * ArticleContent
 	     */
 	    private Long article_id;
 
-	    private String content;
+		private String content;
 	    
 	    @Override
 	    public String toString() {

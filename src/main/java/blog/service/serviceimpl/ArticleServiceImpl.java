@@ -32,12 +32,12 @@ public class ArticleServiceImpl implements ArticleService{
 	articleInfo.setTitle(articleDto.getTitle());
 	articleInfo.setIs_top(articleDto.getIs_top());
 	articleInfo.setImage_path(articleDto.getImage_path());
-	articleinfomapper.insert(articleInfo);
+	articleinfomapper.insertSelective(articleInfo);
 	//ArticleContent
 	ArticleContent articleContent = new ArticleContent();
 	articleContent.setContent(articleDto.getContent());
 	articleContent.setArticle_id(getLatestArticleId());
-	articlecontentmapper.insert(articleContent);
+	articlecontentmapper.insertSelective(articleContent);
 	}
 	
 	@Override
