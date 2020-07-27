@@ -21,6 +21,7 @@ import blog.dto.ArticleDto;
 import blog.pojo.ArticleView;
 import blog.pojo.ArticleViewExample;
 import blog.pojo.Category;
+import blog.pojo.CategoryExample;
 import blog.pojo.SysView;
 import blog.pojo.SysViewExample;
 import blog.pojo.User;
@@ -104,8 +105,12 @@ public class BackController extends BaseController{
 	 * @param category
 	 * @return
 	 */
-	@PutMapping("/categroy")
+	@PutMapping("/category")
+	@ResponseBody
 	public String updateCategory(Category category) {
+		String newname = category.getName();
+		category = categoryservice.selectByPrimaryKey(category.getId());
+		category.setName(newname);
 		categoryservice.updateByPrimaryKeySelective(category);
 		return null;
 	}

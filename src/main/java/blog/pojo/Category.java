@@ -3,15 +3,17 @@ package blog.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Category implements Serializable {
     private Long id;
 
     private String name;
 
     private Long number;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date create_by;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modify_by;
 
     private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 package blog.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -45,11 +46,16 @@ public class ForeController extends BaseController{
 	 * @return
 	 */
 	@GetMapping("/api/category")
-	public List<Category> getCategories(){
+	public HashMap getCategories(){
 		CategoryExample example = new CategoryExample();
 		example.setOrderByClause("id asc");
 		List<Category> categories = categoryservice.selectByExample(example);
-		return categories;
+		HashMap hashMap = new HashMap();
+		hashMap.put("code", 0);
+		hashMap.put("msg", "");
+		hashMap.put("count", categories.size());
+		hashMap.put("data", categories);
+		return hashMap;
 	}
 	/**
 	 * 获取某一分类

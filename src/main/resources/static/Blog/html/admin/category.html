@@ -35,40 +35,32 @@
       
       <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">
-						<div class="layui-btn-group demoTable">
-			  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-			  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-			  
-			</div>
+        
+			<script type="text/html" id="toolbarDemo">
+ 	 <div class="layui-btn-container">
+   	 <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+ 	 </div>
+		</script>
 			 
-			<table class="layui-table" lay-data="{width: 892, height:330, url:, page:false, id:'idTest'}" lay-filter="demo">
-			  <thead>
-				<tr>
-				  <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-				  <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-				  <th lay-data="{field:'name', width:80}">分类名</th>
-				  <th lay-data="{field:'number', width:120}">分类文章数</th>
-				  <th lay-data="{field:'create_by', width:120}">创建时间</th>
-				  <th lay-data="{field:'modify_by', width:120}">修改时间</th>
-				  <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
-				</tr>
-			  </thead>
+			<table class="layui-table" lay-filter="demo" id="table">
 			</table>
 		
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
 		  <legend>编辑</legend>
 		</fieldset>
 		
-		<form class="layui-form" action="">
+		<form class="layui-form" action="/category" method="post">
+		<input type="hidden" name="_method" value="put"/>
+		<input id="oldcategoryid" type="hidden" name="id" value=""/>
 	<div class="layui-form-item">
 		<div class="layui-form-item">
-		<label class="layui-form-label" style="width:200px;text-align:left;" id="oldCategoryName">旧的分类名：</label>
+		<label class="layui-form-label">旧的分类名:</label>
+		<input id="oldCategoryName" type="text" name="oldname" lay-verify="title" autocomplete="off" readonly="readonly" placeholder="请输入分类名" class="layui-input" style="width:200px;">
 		</div>
 	<div>
     <label class="layui-form-label">新的分类名:</label>
 		<div class="layui-input-block">
-		<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入分类名" class="layui-input" style="width:200px;">
+		<input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入分类名" class="layui-input" style="width:200px;">
 		</div>
 	</div>
 	</div>
@@ -100,44 +92,44 @@
 	
 	layui.use('table', function(){
 	  var table = layui.table;
-	  //监听工具条
-	  table.on('tool(demo)', function(obj){
-		var data = obj.data;
-		if(obj.event === 'detail'){
-		  layer.msg('ID：'+ data.id + ' 的查看操作');
-		} else if(obj.event === 'del'){
-		  layer.confirm('真的删除行么', function(index){
-			obj.del();
-			layer.close(index);
+	  
+	  table.render({
+		    elem: '#table'
+		    ,url:'/api/category'
+		    ,toolbar: '#toolbarDemo'
+		    ,title: '分类数据表'
+		    ,totalRow: true
+		    ,cols: [[
+		      {field:'id', title:'ID',  fixed: 'left', unresize: true, sort: true, totalRowText: '合计行'}
+		      ,{field:'name', title:'分类名'}
+		      ,{field:'number', title:'分类文章数'}
+		      ,{field:'create_by', title:'创建时间'}
+		      ,{field:'modify_by', title:'修改时间' }
+		      ,{type:'radio'}
+		    ]]
+		    ,page: false
+		    ,response: {
+		      statusCode: 0 //重新规定成功的状态码为 200，table 组件默认为 0
+		    }
+		    
 		  });
-		} else if(obj.event === 'edit'){
-		  layer.alert('编辑行：<br>'+ JSON.stringify(data))
-		}
-	  });
 	  
-	  var $ = layui.$, active = {
-		getCheckData: function(){ //获取选中数据
-		  var checkStatus = table.checkStatus('idTest')
-		  ,data = checkStatus.data;
-		  layer.alert(JSON.stringify(data));
-		}
-		,getCheckLength: function(){ //获取选中数目
-		  var checkStatus = table.checkStatus('idTest')
-		  ,data = checkStatus.data;
-		  layer.msg('选中了：'+ data.length + ' 个');
-		}
-		,isAll: function(){ //验证是否全选
-		  var checkStatus = table.checkStatus('idTest');
-		  layer.msg(checkStatus.isAll ? '全选': '未全选')
-		}
-	  };
-	  
-	  $('.demoTable .layui-btn').on('click', function(){
-		var type = $(this).data('type');
-		active[type] ? active[type].call(this) : '';
+	  //头工具栏事件
+	  table.on('toolbar(demo)', function(obj){
+	    var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+	    switch(obj.event){
+	      case 'getCheckData':
+	        var data = checkStatus.data;  //获取选中行数据
+	        var str = JSON.stringify(data[0]);
+	        str = JSON.parse(str);
+	        document.querySelector("#oldCategoryName").value = str.name;
+	        document.querySelector("#oldcategoryid").value = str.id;
+	        break;
+	    };
 	  });
 	});
-				
+			
+	
     </script>
     </body>
     </html>
