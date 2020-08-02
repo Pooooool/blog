@@ -1,5 +1,4 @@
 $(window).load(function(){
-	console.log("hello");
 		//获取所有文章
 		$.ajax({
 			url:"http://127.0.0.1:80/api/articleinfo",

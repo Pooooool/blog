@@ -73,10 +73,16 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public ArticleDto selectOneById(Long id) {
-		// TODO Auto-generated method stub
-		ArticleDto articleDto = new ArticleDto();
-		ArticleContent articleContent = articlecontentmapper.selectByPrimaryKey(id);
-		ArticleInfo articleInfo = articleinfomapper.selectByPrimaryKey(articleContent.getArticle_id());
+		ArticleDto articleDto = null;
+		ArticleContent articleContent = null;
+		ArticleInfo articleInfo = null;
+		try {
+			articleContent = articlecontentmapper.selectByPrimaryKey(id);
+			articleInfo = articleinfomapper.selectByPrimaryKey(articleContent.getArticle_id());
+		} catch (Exception e) {
+			return null;
+		}
+		articleDto = new ArticleDto();
 		articleDto.setArticle_id(articleContent.getArticle_id());
 		articleDto.setCategory(articleInfo.getCategory());
 		articleDto.setContent(articleContent.getContent());

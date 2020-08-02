@@ -6,6 +6,10 @@ $(window).load(function(){
 			type:"GET",
 			dataType:"json",
 			success: function(json) {
+				console.log(json);
+				if (json==null) {
+					location.href="/error.html";
+				}
 				document.querySelector("#articleTitle").innerText =json.title;
 				document.querySelector("#articleCreateBy").innerText= json.create_by;
 				document.querySelector("#articleImg").src = json.image_path;

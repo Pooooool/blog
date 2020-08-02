@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import blog.dto.ArticleDto;
 import blog.pojo.ArticleView;
@@ -27,6 +29,7 @@ import blog.pojo.SysViewExample;
 import blog.pojo.User;
 
 @Controller
+@RequestMapping("/admin")
 public class BackController extends BaseController{
 	private static String account = "admin";
 	private static String password = "admin";
@@ -35,22 +38,20 @@ public class BackController extends BaseController{
 	public String login(User user,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		if (user.getName().equals(account) && user.getPassword().equals(password)) {
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("/admin/article.html");
+			response.sendRedirect(request.getContextPath()+"/admin/article.html");
 		} else {
-			response.sendRedirect("/admin/login.html");
+			response.sendRedirect(request.getContextPath()+"/admin/login.html");
 		}
 		return null;
 	}
 	
-	
-	
+
 	/**
 	 * 增加一篇文章
 	 * @param articleDto
 	 * @return
 	 */
 	@PostMapping("/article")
-	@ResponseBody
 	public String addArticle(ArticleDto articleDto,
 			@RequestParam(name = "file",required = false)String imgfile,
 			@RequestParam(name = "topswitch",required = false)String topswitch) {
@@ -119,7 +120,7 @@ public class BackController extends BaseController{
 	 * @return
 	 */
 	 
-	@GetMapping("/admin/view/article")
+	@GetMapping("view/article")
 	public List<ArticleView> getArticleViews(){
 		ArticleViewExample example = new ArticleViewExample();
 		example.setOrderByClause("id asc");
@@ -131,7 +132,7 @@ public class BackController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/admin/view/article/{id}")
+	@GetMapping("view/article/{id}")
 	public ArticleView getArticleView(@RequestParam(value = "id",required = true)Long id) {
 		ArticleView articleView = articleviewservice.selectByPrimaryKey(id);
 		return articleView;
@@ -142,7 +143,7 @@ public class BackController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("/admin/view/article/{id}")
+	@DeleteMapping("view/article/{id}")
 	public String deleteArticleView(@RequestParam(value = "id",required = true)Long id) {
 		articleservice.deleteArticle(id);
 		return null;
@@ -152,7 +153,7 @@ public class BackController extends BaseController{
 	 * 获取系统访问
 	 * @return
 	 */
-	@GetMapping("/admin/view/system")
+	@GetMapping("view/system")
 	public List<SysView> getSysViews(){
 		SysViewExample example = new SysViewExample();
 		example.setOrderByClause("id asc");
@@ -164,7 +165,7 @@ public class BackController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/admin/view/system/{id}")
+	@GetMapping("view/system/{id}")
 	public SysView getSysView(@RequestParam(value = "id",required = true)Long id) {
 		SysView sysView  = sysviewservice.selectByPrimaryKey(id);
 		return sysView;
@@ -174,13 +175,21 @@ public class BackController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("/admin/view/system/{id}")
+	@DeleteMapping("view/system/{id}")
 	public String deleteSysView(@RequestParam(value = "id",required = true)Long id) {
 		sysviewservice.deleteByPrimaryKey(id);
 		return null;
 	}
 	
-	
+	@GetMapping("/test")
+	@ResponseBody
+	public User test() {
+		User user = new User();
+		user.setName("1");
+		user.setPassword("123");
+		System.out.println(user);
+		return user;
+	}
 	
 
 }

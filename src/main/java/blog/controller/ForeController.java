@@ -1,8 +1,13 @@
 package blog.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +40,21 @@ public class ForeController extends BaseController{
 	 * 获取某一文章
 	 * @param id
 	 * @return
+	 * @throws IOException 
+	 * @throws ServletException 
 	 */
 	@GetMapping("/api/article/{articleId}")
-	public ArticleDto getArticle(@PathVariable(value = "articleId",required = true)Long id) {
+	public ArticleDto getArticle(@PathVariable("articleId")Long articleId,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse)  {
+		Long id = (Long)articleId;
 		ArticleDto articleDto = articleservice.selectOneById(id);
+		if (articleDto==null) {
+			try {
+				httpServletResponse.sendRedirect("/error.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
 		return articleDto;
 	}
 	/**
