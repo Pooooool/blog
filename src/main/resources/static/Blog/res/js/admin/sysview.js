@@ -1,7 +1,7 @@
-window.onload(){
+$(window).load(function(){
 	
 	$.ajax({
-		url:"admin/view/system",
+		url:"http://127.0.0.1:80/admin/view/system",
 		type:"GET",
 		dataType:"json",
 		success: function(json) {
@@ -9,14 +9,14 @@ window.onload(){
 			var itemlist = document.querySelector("#itemlist");
 			$.each(json,function(i,sysview){
 				
-				articleViewInfo.content.querySelector("#sysview-id").innerText = sysview.id;
-				articleViewInfo.content.querySelector("#sysview-ip").innerText = sysview.ip;
-				articleViewInfo.content.querySelector("#sysview-operation").innerText = sysview.operation;
-				articleViewInfo.content.querySelector("#sysview-createby").innerText = sysview.create_by;
+				sysViewInfo.content.querySelector("#sysview-id").innerText = sysview.id;
+				sysViewInfo.content.querySelector("#sysview-ip").innerText = sysview.ip;
+				sysViewInfo.content.querySelector("#sysview-operation").innerText = sysview.operation;
+				sysViewInfo.content.querySelector("#sysview-createby").innerText = sysview.create_by;
 				
-				itemlist.appendChild(articleViewInfo.content.querySelector("tr").cloneNode(true));
+				itemlist.appendChild(sysViewInfo.content.querySelector("tr").cloneNode(true));
 			});
 		}
 	});
 	
-}
+});

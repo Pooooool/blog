@@ -15,14 +15,12 @@
     <div class="layui-logo">
      Blog后台
     </div> 
-    <!-- 头部区域（可配合layui已有的水平导航） --> 
     <ul class="layui-nav layui-layout-left"> 
      <li class="layui-nav-item"><a href="">控制台</a></li> 
     </ul> 
    </div> 
    <div class="layui-side layui-bg-black"> 
     <div class="layui-side-scroll"> 
-     <!-- 左侧导航区域（可配合layui已有的垂直导航） --> 
      <ul class="layui-nav layui-nav-tree" lay-filter="test"> 
       <li class="layui-nav-item layui-this"><a href="/admin/article.html">文章管理</a></li> 
       <li class="layui-nav-item"><a href="/admin/category.html">分类管理</a></li> 
@@ -41,7 +39,7 @@
    <div class="layui-body"> 
     <!-- 内容主体区域 --> 
     <div style="padding: 15px;"> 
-     <form class="layui-form" action="/article" method="post"> 
+     <form class="layui-form" action="/admin/article" method="get"> 
       <div class="layui-form-item"> 
        <label class="layui-form-label">标题</label> 
        <div class="layui-input-block"> 

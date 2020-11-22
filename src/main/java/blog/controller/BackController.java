@@ -1,13 +1,18 @@
 package blog.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,13 +50,13 @@ public class BackController extends BaseController{
 		return null;
 	}
 	
-
+	
 	/**
 	 * 增加一篇文章
 	 * @param articleDto
 	 * @return
 	 */
-	@PostMapping("/article")
+	@GetMapping("/article")
 	public String addArticle(ArticleDto articleDto,
 			@RequestParam(name = "file",required = false)String imgfile,
 			@RequestParam(name = "topswitch",required = false)String topswitch) {
@@ -62,13 +67,13 @@ public class BackController extends BaseController{
 		}
 		articleDto.setImage_path(imgfile);
 		
-	    Date dNow = new Date( );	
+	    Date dNow = new Date();	
 	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 	    
 	    
 		
 		articleservice.addArticle(articleDto);
-		return null;
+		return "/admin/article.html";
 	}
 	/**	
 	 * 更新一篇文章
@@ -98,8 +103,10 @@ public class BackController extends BaseController{
 	 */
 	@PostMapping("/category")
 	public String addCategory(Category category) {
+		category.setNumber((long)0);
 		categoryservice.insertSelective(category);
-		return null;
+		
+		return "redirect:/admin/category.html";
 	}
 	/**
 	 * 更新分类
@@ -107,21 +114,48 @@ public class BackController extends BaseController{
 	 * @return
 	 */
 	@PutMapping("/category")
-	@ResponseBody
-	public String updateCategory(Category category) {
-		String newname = category.getName();
-		category = categoryservice.selectByPrimaryKey(category.getId());
-		category.setName(newname);
-		categoryservice.updateByPrimaryKeySelective(category);
+	public String updateCategory(Category category,@RequestParam(name = "createtime")String create_by) {
+		if (category!=null) {
+			
+			
+			Date d = new Date();		
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			try {
+				d = sdf.parse(sdf.format(d));
+				//设置创建时间
+				category.setCreate_by(sdf.parse(create_by));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			category.setModify_by(d);//设置修改时间
+			
+			categoryservice.updateByPrimaryKeySelective(category);
+			return "redirect:/admin/category.html";
+		}else{
+			return "redirect:/error.html";
+		}
+
+
+	}
+	
+	
+	@DeleteMapping("/category")
+	public String deleteCategory(@RequestParam(name="id")long id) {
+		categoryservice.deleteByPrimaryKey(id);	
 		return null;
 	}
+	
+	
 	/**
 	 * 获取文章访问
 	 * @return
 	 */
 	 
-	@GetMapping("view/article")
+	@GetMapping("/view/article")
+	@ResponseBody
 	public List<ArticleView> getArticleViews(){
+		System.out.println(true);
 		ArticleViewExample example = new ArticleViewExample();
 		example.setOrderByClause("id asc");
 		List<ArticleView> articleViews = articleviewservice.selectByExample(example);
@@ -153,7 +187,8 @@ public class BackController extends BaseController{
 	 * 获取系统访问
 	 * @return
 	 */
-	@GetMapping("view/system")
+	@GetMapping("/view/system")
+	@ResponseBody
 	public List<SysView> getSysViews(){
 		SysViewExample example = new SysViewExample();
 		example.setOrderByClause("id asc");
@@ -181,15 +216,5 @@ public class BackController extends BaseController{
 		return null;
 	}
 	
-	@GetMapping("/test")
-	@ResponseBody
-	public User test() {
-		User user = new User();
-		user.setName("1");
-		user.setPassword("123");
-		System.out.println(user);
-		return user;
-	}
 	
-
 }

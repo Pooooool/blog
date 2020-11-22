@@ -19,14 +19,11 @@ public class BackInterceptor implements HandlerInterceptor{
 			throws Exception {
 		boolean flag = true;
 		User user = (User) request.getSession().getAttribute("user");
-		System.out.println(user != null);
-		System.out.println(user);
 		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/error.html");		
 			flag = false;
 		}else {
 			if(user.getName().equals(name) && user.getPassword().equals(password)) {
-				System.out.println("inter:true");
 				flag = true;
 				
 			}else {
@@ -35,7 +32,6 @@ public class BackInterceptor implements HandlerInterceptor{
 		}
 		//request.getRequestDispatcher(request.getContextPath()+"/error.html").forward(request, response);
 		
-		System.out.println("inter:false");
 		return flag;
 		
 		

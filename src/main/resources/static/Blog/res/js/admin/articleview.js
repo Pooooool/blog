@@ -1,7 +1,7 @@
-window.onload(){
+$(window).load(function(){
 	
 	$.ajax({
-		url:"admin/view/article",
+		url:"http://127.0.0.1:80/admin/view/article",
 		type:"GET",
 		dataType:"json",
 		success: function(json) {
@@ -19,4 +19,4 @@ window.onload(){
 		}
 	});
 	
-}
+});

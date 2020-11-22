@@ -29,16 +29,13 @@ public class ForeInterceptor implements HandlerInterceptor{
 		
 		sysview.setIp(ip);
 		sysview.setOperation(operation);
-		System.out.println(operation.contains("essay"));
 		if (operation.contains("/api/article/")) {
 			articleview.setIp(ip);
 			Long articleID = null;			
 			try {
 				String requestparam = request.getRequestURL().toString();
-				System.out.println(request.getRequestURL());
 				String[] parameterarr =  requestparam.split("/article/");
 				articleID = Long.parseLong(parameterarr[parameterarr.length-1]);  
-				System.out.println(articleID);
 			} catch (Exception e) {
 				
 				sysviewservice.insertSelective(sysview);
